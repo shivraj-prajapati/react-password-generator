@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+  background-color: #eaebd4;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.passwordbox{
+  width: 450px;
+  height: 450px;
+  background-color: #c8df82;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.passwordBoxIn{
+  width: 80%;
+  display: flex;
+  margin-top: 5px;
+}
+.passwordBoxIn input{
+  flex-basis: 80%;
+  outline: none;
+  border: 2px solid #a6bc62;
+  padding: 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+
+}
+
+.passwordBoxIn button{
+  flex-basis: 20%;
+  background-color: #a6bc62;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  padding: 7px 20px;
+}
+.passwordBoxIn button:hover{
+  background-color: #8faa4c;
+  box-shadow: 0px 0px 5px #8faa4c;
+}
+.passwordlen, .passwordlen2{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  font-size: 17px;
+  padding: 15px 0px;
+  align-items: left;
+}
+.passwordlen2 label{
+  flex-basis: 80%;
+  font-size:  17px;
+  text-align: flex-start;
+}
+.passwordlen2 input{
+  padding: 5px 5px;
+  border: 2px solid #a6bc62;
+  border-radius: 5px;
+  outline: none;
+}
+.passwordlen label{
+  flex-basis: 80%;
+  font-size:  15pxpx;
+  text-align: flex-start;
+}
+.passwordlen input{
+  width: 20px;
+  height: 20px;
+  padding: 20px;
+  font-size: 15px;
+  border: 2px solid #a6bc62;
+  border-radius: 5px;
+  outline: none;
+}
+.btn-gen{
+  width: 82%;
+  background-color: #a6bc62;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+  padding: 13px 25px;
+  margin-top: 10px;
+}

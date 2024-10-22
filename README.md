@@ -69,17 +69,6 @@ Follow these simple steps to get started:
 
 ---
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are always welcome! If you find a bug or want to suggest a feature, feel free to [open an issue](https://github.com/shivraj-prajapati/react-password-generator/issues) on the repository.
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/shivraj-prajapati/react-password-generator/blob/main/LICENSE) file for more details.
-
----
 
 Made with ❤️ by [Shivraj Prajapati](https://github.com/shivraj-prajapati)
 

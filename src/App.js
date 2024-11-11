@@ -62,7 +62,7 @@ function App() {
   return (
     <div className="App">
       <div className="passwordbox">
-        <h2>Password Generator</h2>
+        <h2>Password Generator App</h2>
         <div className="passwordBoxIn">
           <input type="text" value={fpass} id="password" readOnly />
           <button id="generate" onClick={copyPass}>

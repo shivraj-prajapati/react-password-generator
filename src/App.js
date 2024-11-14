@@ -4,122 +4,85 @@ import { useState } from "react";
 import { UC, LC, NC, SC } from "./data/PassChar";
 
 function App() {
-  let [uppercase, setUppercase] = useState(false);
-  let [lowercase, setLowercase] = useState(false);
-  let [specialchar, setSpecialchar] = useState(false);
-  let [numbers, setNumbers] = useState(false);
-  let [passwordlen, setPasswordLen] = useState(6);
-  let [fpass, setFpass] = useState("");
+  const [uppercase, setUppercase] = useState(false);
+  const [lowercase, setLowercase] = useState(false);
+  const [specialchar, setSpecialchar] = useState(false);
+  const [numbers, setNumbers] = useState(false);
+  const [passwordlen, setPasswordLen] = useState(6);
+  const [fpass, setFpass] = useState("");
 
-  
-  let createPassword = () => {
-    let finalPassword = "";
-    let charSet = "";
-    let guaranteedChars = []; 
-
-    if (uppercase || lowercase || specialchar || numbers) {
-      
-      if (uppercase) {
-        charSet += UC;
-        guaranteedChars.push(UC.charAt(Math.floor(Math.random() * UC.length)));
-      }
-      if (lowercase) {
-        charSet += LC;
-        guaranteedChars.push(LC.charAt(Math.floor(Math.random() * LC.length)));
-      }
-      if (specialchar) {
-        charSet += SC;
-        guaranteedChars.push(SC.charAt(Math.floor(Math.random() * SC.length)));
-      }
-      if (numbers) {
-        charSet += NC;
-        guaranteedChars.push(NC.charAt(Math.floor(Math.random() * NC.length)));
-      }
-
-      
-      for (let i = guaranteedChars.length; i < passwordlen; i++) {
-        finalPassword += charSet.charAt(Math.floor(Math.random() * charSet.length));
-      }
-
-      
-      finalPassword += guaranteedChars.join('');
-      finalPassword = shufflePassword(finalPassword); 
-      setFpass(finalPassword);
-    } else {
+  // Function to generate password
+  const createPassword = () => {
+    if (!uppercase && !lowercase && !specialchar && !numbers) {
       alert("Please select at least one option");
+      return;
     }
+
+    let charSet = "";
+    let guaranteedChars = [];
+
+    // Add selected character types to charSet and guarantee one of each selected type in the password
+    if (uppercase) addCharType(UC, guaranteedChars);
+    if (lowercase) addCharType(LC, guaranteedChars);
+    if (specialchar) addCharType(SC, guaranteedChars);
+    if (numbers) addCharType(NC, guaranteedChars);
+
+    // Complete the password with random characters from charSet
+    let finalPassword = Array.from({ length: passwordlen - guaranteedChars.length }, () =>
+      charSet.charAt(Math.floor(Math.random() * charSet.length))
+    ).join('');
+
+    // Concatenate guaranteed characters and shuffle
+    finalPassword += guaranteedChars.join('');
+    setFpass(shufflePassword(finalPassword));
   };
 
-  
-  let shufflePassword = (password) => {
-    return password.split('').sort(() => Math.random() - 0.5).join('');
+  // Helper function to add characters of a type and push a guaranteed character
+  const addCharType = (chars, guaranteedChars) => {
+    charSet += chars;
+    guaranteedChars.push(chars.charAt(Math.floor(Math.random() * chars.length)));
   };
 
-  let copyPass = () => {
-    navigator.clipboard.writeText(fpass);
-  };
+  // Function to shuffle characters in a password string
+  const shufflePassword = (password) => password.split('').sort(() => Math.random() - 0.5).join('');
+
+  // Function to copy password to clipboard
+  const copyPass = () => navigator.clipboard.writeText(fpass);
 
   return (
     <div className="App">
       <div className="passwordbox">
         <h2>Password Generator App</h2>
         <div className="passwordBoxIn">
-          <input type="text" value={fpass} id="password" readOnly />
-          <button id="generate" onClick={copyPass}>
-            Copy
-          </button>
+          <input type="text" value={fpass} readOnly />
+          <button onClick={copyPass}>Copy</button>
         </div>
         <div className="passwordlen2">
-          <label>Password Length :</label>
+          <label>Password Length:</label>
           <input
             type="number"
             value={passwordlen}
-            onChange={(event) => setPasswordLen(event.target.value)}
+            onChange={(e) => setPasswordLen(e.target.value)}
             max={20}
             min={4}
           />
         </div>
-        <div className="passwordlen">
-          <label>Including Uppercase :</label>
-          <input
-            type="checkbox"
-            checked={uppercase}
-            onChange={() => setUppercase(!uppercase)}
-          />
-        </div>
-
-        <div className="passwordlen">
-          <label>Including Lowercase :</label>
-          <input
-            type="checkbox"
-            checked={lowercase}
-            onChange={() => setLowercase(!lowercase)}
-          />
-        </div>
-
-        <div className="passwordlen">
-          <label>Including Special Characters :</label>
-          <input
-            type="checkbox"
-            checked={specialchar}
-            onChange={() => setSpecialchar(!specialchar)}
-          />
-        </div>
-
-        <div className="passwordlen">
-          <label>Including Numbers :</label>
-          <input
-            type="checkbox"
-            checked={numbers}
-            onChange={() => setNumbers(!numbers)}
-          />
-        </div>
-        <button className="btn-gen" onClick={createPassword}>
-          Generate Password
-        </button>
+        <Checkbox label="Including Uppercase" checked={uppercase} onChange={() => setUppercase(!uppercase)} />
+        <Checkbox label="Including Lowercase" checked={lowercase} onChange={() => setLowercase(!lowercase)} />
+        <Checkbox label="Including Special Characters" checked={specialchar} onChange={() => setSpecialchar(!specialchar)} />
+        <Checkbox label="Including Numbers" checked={numbers} onChange={() => setNumbers(!numbers)} />
+        <button className="btn-gen" onClick={createPassword}>Generate Password</button>
       </div>
     </div>
   );
 }
+
+// Checkbox component for each option
+const Checkbox = ({ label, checked, onChange }) => (
+  <div className="passwordlen">
+    <label>{label}:</label>
+    <input type="checkbox" checked={checked} onChange={onChange} />
+  </div>
+);
 
 export default App;

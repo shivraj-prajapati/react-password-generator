@@ -30,13 +30,7 @@ Follow these simple steps to get started:
    cd react-password-generator
    ```
 
-3. **Install the necessary dependencies**:
-
-   ```bash
-   npm install
-   ```
-
-4. **Start the application**:
+3. **Start the application**:
 
    ```bash
    npm start
